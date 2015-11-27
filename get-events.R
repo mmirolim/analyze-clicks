@@ -12,7 +12,7 @@ qjson <- '{"regdate":{"$lte":1446249600}}'
 fldjson <- '{"_id":false, "regdate":true,"eventdate":true,"profileid":true}'
 query <- mongo.bson.from.JSON(qjson)
 fldbson <- mongo.bson.from.JSON(fldjson)
-cursor <- mongo.find(m, ec, query, fields = fldbson, limit = 40000L)
+cursor <- mongo.find(m, ec, query, fields = fldbson, limit = 100L)
 # prepare data frame
 events <- data.frame("eventdate" = as.Date(as.character(), format = "%Y-%m-%d"), "profileid" = integer(), "regdate" = integer(), stringsAsFactors = FALSE)
 while (mongo.cursor.next(cursor)) {
@@ -31,5 +31,5 @@ freqs <- data$freq
 barplot(freqs, names.arg = days)
 clicksByProf <- count(events, "profileid")
 trans <- count(clicksByProf, "freq")
-barplot(trans$freq.1, names.arg = trans$freq)
+barplot(trans$freq.1, names.arg = trans$fre)
 
